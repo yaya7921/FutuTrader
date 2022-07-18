@@ -5,7 +5,6 @@ import com.futu.openapi.pb.QotCommon;
 import com.futu.openapi.pb.QotGetSecuritySnapshot;
 import com.futu.openapi.pb.QotGetStaticInfo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

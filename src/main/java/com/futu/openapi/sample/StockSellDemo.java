@@ -1,5 +1,6 @@
 package com.futu.openapi.sample;
 
+import com.futu.openapi.common.Config;
 import com.futu.openapi.pb.*;
 
 import java.util.ArrayList;

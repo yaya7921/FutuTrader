@@ -1,9 +1,9 @@
 package com.futu.openapi.sample;
 
 import com.futu.openapi.FTAPI_Conn;
+import com.futu.openapi.common.Config;
 import com.futu.openapi.pb.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

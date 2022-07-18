@@ -1,44 +1,16 @@
 package com.futu.openapi.sample;
 
 import com.futu.openapi.*;
+import com.futu.openapi.common.Config;
+import com.futu.openapi.common.Connection.ConnStatus;
+import com.futu.openapi.common.ReqInfo;
 import com.futu.openapi.pb.*;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessageV3;
 
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-
-class ConnError extends RuntimeException {
-    private long errCode;
-
-    ConnError(long errCode, String desc) {
-        super(desc);
-        this.errCode = errCode;
-    }
-
-    long getErrCode() {
-        return errCode;
-    }
-}
-
-enum ConnStatus {
-    DISCONNECT,
-    READY
-}
-
-class ReqInfo {
-    int protoID;
-    Object syncEvent;
-    GeneratedMessageV3 rsp;
-
-    ReqInfo(int protoID, Object syncEvent) {
-        this.protoID = protoID;
-        this.syncEvent = syncEvent;
-    }
-}
 
 public class DemoBase implements FTSPI_Conn, FTSPI_Qot, FTSPI_Trd {
     protected Object qotLock = new Object();
