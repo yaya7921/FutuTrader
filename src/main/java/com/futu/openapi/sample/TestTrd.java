@@ -7,11 +7,14 @@ import com.futu.openapi.FTSPI_Trd;
 import com.futu.openapi.common.Config;
 import com.futu.openapi.pb.*;
 
+/**
+ * @author shuyun
+ */
 public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
     FTAPI_Conn_Trd trd = new FTAPI_Conn_Trd();
     private final Object lock = new Object();
 
-    TestTrd() {
+    public TestTrd() {
         /*
         设置客户端信息
          */
@@ -27,12 +30,12 @@ public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
     }
 
     //连接OpenD
-    void start() {
+    public void start() {
         trd.initConnect(Config.opendIP, (short) Config.opendPort, false);
     }
 
     //解锁交易
-    void unlockTrade() {
+    public void unlockTrade() {
         TrdUnlockTrade.C2S c2s = TrdUnlockTrade.C2S.newBuilder()
                 .setUnlock(true)
                 .setPwdMD5(Config.unlockTradePwdMd5)
@@ -43,7 +46,7 @@ public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
     }
 
     //获取交易账号列表
-    void getAccList() {
+    public void getAccList() {
         TrdGetAccList.C2S c2s = TrdGetAccList.C2S.newBuilder().setUserID(0).build();
         TrdGetAccList.Request req = TrdGetAccList.Request.newBuilder().setC2S(c2s).build();
         trd.getAccList(req);
@@ -51,7 +54,7 @@ public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
     }
 
     //下单
-    void placeOrder() {
+    public void placeOrder() {
         TrdCommon.TrdHeader header = TrdCommon.TrdHeader.newBuilder()
                 .setTrdEnv(TrdCommon.TrdEnv.TrdEnv_Real_VALUE)
                 .setAccID(Config.trdAcc)
@@ -72,7 +75,7 @@ public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
         trd.placeOrder(req);
     }
 
-    void getMarginRatio() {
+    public void getMarginRatio() {
         QotCommon.Security sec = QotCommon.Security.newBuilder()
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security_VALUE)
                 .setCode("00388")
@@ -94,7 +97,7 @@ public class TestTrd implements FTSPI_Conn, FTSPI_Trd {
     }
 
     //订阅交易推送，否则不会收到订单相关通知。
-    void subAccPush() {
+    public void subAccPush() {
         TrdSubAccPush.C2S c2s = TrdSubAccPush.C2S.newBuilder().addAccIDList(Config.trdAcc).build();
         TrdSubAccPush.Request req = TrdSubAccPush.Request.newBuilder().setC2S(c2s).build();
         trd.subAccPush(req);

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
+/**
+ * @author shuyun
+ */
 //行情示例
 public class TestQot implements FTSPI_Qot, FTSPI_Conn {
     FTAPI_Conn_Qot qot = new FTAPI_Conn_Qot();
@@ -55,7 +58,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
     }
 
     //测试订阅行情
-    void sub() {
+    public void sub() {
         QotCommon.Security sec = QotCommon.Security.newBuilder().setCode("999010")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Future_VALUE)
                 .build();
@@ -70,14 +73,14 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
     }
 
     //测试获取订阅状态
-    void getSubInfo() {
+    public void getSubInfo() {
         QotGetSubInfo.C2S c2s = QotGetSubInfo.C2S.newBuilder().build();
         QotGetSubInfo.Request req = QotGetSubInfo.Request.newBuilder().setC2S(c2s).build();
         qot.getSubInfo(req);
     }
 
     //测试拉取历史K线数据
-    void requestHistoryKL() {
+    public void requestHistoryKL() {
         QotCommon.Security sec = QotCommon.Security.newBuilder().setCode("TSLA")
                 .setMarket(QotCommon.QotMarket.QotMarket_US_Security.getNumber())
                 .build();
@@ -94,7 +97,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
     }
 
     //测试获取基本行情，需要先订阅才能获取
-    void getBasicQot() {
+    public void getBasicQot() {
         QotCommon.Security sec1 = QotCommon.Security.newBuilder().setCode("00388")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security.getNumber())
                 .build();
@@ -104,7 +107,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
     }
 
     //测试获取期权到期日
-    void getOptionExpirationDate() {
+    public void getOptionExpirationDate() {
         QotCommon.Security sec1 = QotCommon.Security.newBuilder().setCode("00388")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security.getNumber())
                 .build();
@@ -117,7 +120,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.getOptionExpirationDate(req);
     }
 
-    void requestTradeDate() {
+    public void requestTradeDate() {
         QotRequestTradeDate.C2S c2s = QotRequestTradeDate.C2S.newBuilder().setMarket(QotCommon.QotMarket.QotMarket_HK_Security_VALUE)
                 .setBeginTime("2020-02-01")
                 .setEndTime("2020-02-20")
@@ -126,7 +129,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.requestTradeDate(req);
     }
 
-    void stockFilter() {
+    public void stockFilter() {
         QotStockFilter.BaseFilter baseFilter = QotStockFilter.BaseFilter.newBuilder()
                 .setFieldName(QotStockFilter.StockField.StockField_MarketVal.getNumber())
                 .setFilterMin(10000)
@@ -144,7 +147,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         System.out.printf("SendQotStockFilter: %d\n", serialNo);
     }
 
-    void getOptionChain() {
+    public void getOptionChain() {
         QotCommon.Security sec = QotCommon.Security.newBuilder().setCode("00700")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security.getNumber())
                 .build();
@@ -159,7 +162,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.getOptionChain(req);
     }
 
-    void setPriceReminder() {
+    public void setPriceReminder() {
         QotCommon.Security sec = QotCommon.Security.newBuilder().setCode("00700")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security.getNumber())
                 .build();
@@ -173,7 +176,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.setPriceReminder(req);
     }
 
-    void getPriceReminder() {
+    public void getPriceReminder() {
         QotCommon.Security sec = QotCommon.Security.newBuilder().setCode("00700")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security.getNumber())
                 .build();
@@ -182,7 +185,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.getPriceReminder(req);
     }
 
-    void getUserSecurityGroup() {
+    public void getUserSecurityGroup() {
         QotGetUserSecurityGroup.C2S c2s = QotGetUserSecurityGroup.C2S.newBuilder()
                 .setGroupType(QotGetUserSecurityGroup.GroupType.GroupType_All_VALUE)
                 .build();
@@ -190,7 +193,7 @@ public class TestQot implements FTSPI_Qot, FTSPI_Conn {
         qot.getUserSecurityGroup(req);
     }
 
-    void getMarketState() {
+    public void getMarketState() {
         QotCommon.Security sec = QotCommon.Security.newBuilder()
                 .setCode("00700")
                 .setMarket(QotCommon.QotMarket.QotMarket_HK_Security_VALUE)
