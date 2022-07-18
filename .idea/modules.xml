@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/FutuTrader.iml" filepath="$PROJECT_DIR$/.idea/FutuTrader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FTAPI4J_6.2.2708/ftapi4j.iml" filepath="$PROJECT_DIR$/FTAPI4J_6.2.2708/ftapi4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FTAPI4J_6.2.2708/ftapi4j/futu-api.iml" filepath="$PROJECT_DIR$/FTAPI4J_6.2.2708/ftapi4j/futu-api.iml" />
+    </modules>
+  </component>
+</project>
