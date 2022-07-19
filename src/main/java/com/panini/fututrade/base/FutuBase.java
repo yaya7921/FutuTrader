@@ -4,7 +4,9 @@ import com.futu.openapi.*;
 import com.futu.openapi.common.Config;
 import com.futu.openapi.common.Connection;
 import com.futu.openapi.common.ReqInfo;
+import com.futu.openapi.pb.TrdCommon;
 import com.futu.openapi.pb.TrdGetAccList;
+import com.futu.openapi.pb.TrdUnlockTrade;
 
 /**
  * @author shuyun
@@ -27,7 +29,17 @@ public class FutuBase implements FTSPI_Conn, FTSPI_Qot, FTSPI_Trd {
         return trd.initConnect(ip, port, false);
     }
 
-    public TrdGetAccList.Response getAccountList() {
+    public void unlockTrade() {
+        TrdUnlockTrade.C2S c2s = TrdUnlockTrade.C2S.newBuilder()
+                .setUnlock(true)
+                .setPwdMD5(Config.unlockTradePwdMd5)
+                .setSecurityFirm(Config.securityFirm.getNumber())
+                .build();
+        TrdUnlockTrade.Request req = TrdUnlockTrade.Request.newBuilder().setC2S(c2s).build();
+        trd.unlockTrade(req);
+    }
+
+    public TrdGetAccList.Response getAccList() {
         ReqInfo reqInfo;
         TrdGetAccList.C2S c2s = TrdGetAccList.C2S.newBuilder().setUserID(Config.userID).build();
         TrdGetAccList.Request req = TrdGetAccList.Request.newBuilder().setC2S(c2s).build();
@@ -36,5 +48,34 @@ public class FutuBase implements FTSPI_Conn, FTSPI_Qot, FTSPI_Trd {
             return null;
         reqInfo = new ReqInfo(ProtoID.TRD_GETACCLIST, new Object());
         return (TrdGetAccList.Response) reqInfo.rsp;
+    }
+
+    public long getAccId(TrdCommon.TrdMarket trdMarket) {
+        TrdGetAccList.Response arrAccList = getAccList();
+        TrdGetAccList.S2C s2c = arrAccList.getS2C();
+        int nLength = s2c.getAccListCount();
+        for (int i = 0; i < nLength; i++) {
+            if (s2c.getAccList(i).getTrdEnv() == TrdCommon.TrdEnv.TrdEnv_Real_VALUE &&
+                    s2c.getAccList(i).getTrdMarketAuthList(0) == trdMarket.getNumber()) {
+                return s2c.getAccList(i).getAccID();
+            }
+        }
+        return 0;
+    }
+
+    public long getAccIdSim(TrdCommon.TrdMarket trdMarket,
+                            TrdCommon.SimAccType simAccType) {
+        TrdGetAccList.Response arrAccList = getAccList();
+        TrdGetAccList.S2C s2c = arrAccList.getS2C();
+        int nLength = s2c.getAccListCount();
+        for (int i = 0; i < nLength; i++) {
+            if (s2c.getAccList(i).getTrdEnv() == TrdCommon.TrdEnv.TrdEnv_Simulate_VALUE &&
+                    s2c.getAccList(i).getTrdMarketAuthList(0) == trdMarket.getNumber()) {
+                if (s2c.getAccList(i).getSimAccType() == simAccType.getNumber()) {
+                    return s2c.getAccList(i).getAccID();
+                }
+            }
+        }
+        return 0;
     }
 }

@@ -10,7 +10,7 @@ public abstract class Strategy {
 
     public String name;
 
-    public abstract void runSim(TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
+    public abstract void runSim(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
 
-    public abstract void runTrade(TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
+    public abstract void runTrade(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
 }

@@ -18,6 +18,7 @@ public class Main{
 
         Trader myTrader = new Trader(TrdCommon.TrdEnv.TrdEnv_Simulate,
                                      TrdCommon.TrdMarket.TrdMarket_US,
+                                     TrdCommon.SimAccType.SimAccType_Stock,
                                      new MACDStrategy(),
                            "AAPL");
 

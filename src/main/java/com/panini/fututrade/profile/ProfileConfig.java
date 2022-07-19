@@ -14,4 +14,12 @@ public class ProfileConfig {
     解锁交易密码的md5
      */
     public static String unlockTradePwdMd5 = MD5Util.calcMD5("Neal2142");
+    /*
+    请求方ip
+     */
+    public static String opendIP = "127.0.0.1";
+    /*
+    端口
+     */
+    public static short opendPort = 11111;
 }

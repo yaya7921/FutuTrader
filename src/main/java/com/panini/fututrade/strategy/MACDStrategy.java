@@ -13,12 +13,12 @@ public class MACDStrategy extends Strategy {
     }
 
     @Override
-    public void runSim(TrdCommon.TrdMarket trdMarket, QotCommon.Security security) {
+    public void runSim(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security) {
 
     }
 
     @Override
-    public void runTrade(TrdCommon.TrdMarket trdMarket, QotCommon.Security security) {
+    public void runTrade(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security) {
 
     }
 }
