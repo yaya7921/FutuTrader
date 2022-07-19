@@ -2,15 +2,24 @@ package com.panini.fututrade.strategy;
 
 import com.futu.openapi.pb.QotCommon;
 import com.futu.openapi.pb.TrdCommon;
+import com.panini.fututrade.base.FutuBase;
+
+import java.util.List;
 
 /**
  * @author shuyun
  */
-public abstract class Strategy {
+public abstract class Strategy extends FutuBase {
 
     public String name;
 
-    public abstract void runSim(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
+    public void runSim(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) {
+        run(accId, TrdCommon.TrdEnv.TrdEnv_Simulate, trdMarket, security, kLines);
+    }
 
-    public abstract void runTrade(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security);
+    public void runReal(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) {
+        run(accId, TrdCommon.TrdEnv.TrdEnv_Real, trdMarket, security, kLines);
+    }
+
+    public abstract void run(long accId, TrdCommon.TrdEnv trdEnv, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines);
 }
