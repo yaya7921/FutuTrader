@@ -1,4 +1,4 @@
-package com.panini.fututrade.base;
+package com.panini.fututrade.strategy;
 
 import com.futu.openapi.pb.QotCommon;
 import com.futu.openapi.pb.TrdCommon;
@@ -6,7 +6,7 @@ import com.futu.openapi.pb.TrdCommon;
 /**
  * @author shuyun
  */
-public abstract class StrategyBase {
+public abstract class Strategy {
 
     public String name;
 
