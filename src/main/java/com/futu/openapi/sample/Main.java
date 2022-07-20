@@ -11,7 +11,7 @@ public class Main {
 
         FTAPI.init();
 
-        int nDemoIndex = 0;
+        int nDemoIndex = 1;
         if (args.length > 0) {
             for (int i = 0; i < parameter.length; i++) {
                 if (args[0].equals(parameter[i])) {

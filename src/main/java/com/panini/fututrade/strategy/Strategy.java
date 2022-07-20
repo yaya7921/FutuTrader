@@ -9,17 +9,17 @@ import java.util.List;
 /**
  * @author shuyun
  */
-public abstract class Strategy extends FutuBase {
+public abstract class Strategy{
 
     public String name;
 
-    public void runSim(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) {
-        run(accId, TrdCommon.TrdEnv.TrdEnv_Simulate, trdMarket, security, kLines);
+    public void runSim(FutuBase client, long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) throws InterruptedException {
+        run(client, accId, TrdCommon.TrdEnv.TrdEnv_Simulate, trdMarket, security, kLines);
     }
 
-    public void runReal(long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) {
-        run(accId, TrdCommon.TrdEnv.TrdEnv_Real, trdMarket, security, kLines);
+    public void runReal(FutuBase client, long accId, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) throws InterruptedException {
+        run(client, accId, TrdCommon.TrdEnv.TrdEnv_Real, trdMarket, security, kLines);
     }
 
-    public abstract void run(long accId, TrdCommon.TrdEnv trdEnv, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines);
+    public abstract void run(FutuBase client, long accId, TrdCommon.TrdEnv trdEnv, TrdCommon.TrdMarket trdMarket, QotCommon.Security security, List<QotCommon.KLine> kLines) throws InterruptedException;
 }

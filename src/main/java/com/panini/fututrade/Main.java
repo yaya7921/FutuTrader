@@ -1,10 +1,7 @@
 package com.panini.fututrade;
 
 import com.futu.openapi.FTAPI;
-import com.futu.openapi.pb.QotCommon;
 import com.futu.openapi.pb.TrdCommon;
-import com.panini.fututrade.base.FutuBase;
-import com.panini.fututrade.strategy.Strategy;
 import com.panini.fututrade.strategy.MACDStrategy;
 
 /**
@@ -17,12 +14,30 @@ public class Main{
         FTAPI.init();
 
         Trader myTrader = new Trader(TrdCommon.TrdEnv.TrdEnv_Simulate,
-                                     TrdCommon.TrdMarket.TrdMarket_US,
+                                     TrdCommon.TrdMarket.TrdMarket_HK,
                                      TrdCommon.SimAccType.SimAccType_Stock,
                                      new MACDStrategy(),
-                           "AAPL");
+                           "00700");
 
-        myTrader.run();
+        try {
+            while(true) {
+                Thread task = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            myTrader.run();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                task.run();
+                task.sleep(1000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         FTAPI.unInit();
     }
